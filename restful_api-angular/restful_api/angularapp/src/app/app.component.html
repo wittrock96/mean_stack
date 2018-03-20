@@ -1,0 +1,42 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+<h1>Restful Task Api</h1>
+<h1>all the tasks:</h1>
+<button (click)='getTasksFromService()'>all tasks</button>
+<div *ngIf="(!hidden)">
+<ul *ngFor="let element of tasks">
+  <li>Title: {{element.title}}</li>
+</ul>
+</div>
+<p></p>
+<form (submit)="getTaskFromService($event)">
+  <input
+  [(ngModel)]='task.id'
+  
+  type="text" 
+  name="id">
+  <input type="submit">
+</form>
+<p>{{task | json}}</p>
+<form (submit)="createTask($event)">
+  <input 
+    type="text"
+    name="title"
+    required
+    minlength="2"
+    maxlength="10"
+    [(ngModel)]="newtask.title"
+    #title="ngModel" 
+    >
+    <input 
+    type="text"
+    name="desc"
+    required
+    minlength="2"
+    maxlength="30"
+    [(ngModel)]="newtask.desc"
+    #desc="ngModel"
+    >
+    <button type="submit">create task</button>
+
+</form>

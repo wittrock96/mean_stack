@@ -1,0 +1,15 @@
+user my_first_db
+
+ db.createCollection('students')
+
+ db.students.insert({name: '', home_state:'', lucky_number: num, birthday:{month:num, day:num, year:num}})
+
+db.students.find({dojo: dojo_name})
+
+db.students.find({lucky_number: {$gt: 3 && $lt:10}})
+
+ db.students.remove({home_state: 'stat_name'})
+
+db.students.remove({name:'name'})
+
+db.students.remove({lucky_number: {$gt: 5}})

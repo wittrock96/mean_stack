@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		$.get("https://api.github.com/users/wittrock96", displayName)
+		function displayName(data, callback) {
+			console.log(data.name)
+		}
+	</script>
+</body>
+</html>
