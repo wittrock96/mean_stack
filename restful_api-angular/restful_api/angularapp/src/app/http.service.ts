@@ -19,6 +19,14 @@ export class HttpService {
 		console.log('inside create')
 		return this._http.post('/create', newtask)
 	}
+	edit(current_task){
+		console.log('inside edit')
+		return this._http.put(`/tasks/${current_task._id}`, current_task)
+	}
+	delete(destroy_task){
+		console.log('deleting')
+		return this._http.delete(`/remove/${destroy_task._id}`)
+	}
 	
 
 }

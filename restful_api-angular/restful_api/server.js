@@ -66,13 +66,14 @@ app.post('/create', (req, res)=>{
 	})
 })
 app.put('/tasks/:id', (req, res) =>{
+	console.log('inside server')
 	let task = Task.findOne({_id: req.params.id}, (err, task)=>{
 		if(err){
 			console.log('error')
 			res.json({message: 'error', errors: err})
 		}
 		else{
-			
+			console.log('something has fucked up')
 			task.title = req.body.title
 			task.desc = req.body.desc
 			task.save((err)=>{
@@ -80,16 +81,16 @@ app.put('/tasks/:id', (req, res) =>{
 					res.json({message: 'error', error: err})
 				}
 				else{
-					res.redirect('/')
+					res.json({message: 'success', task: task})
 				}
 			})
 		}
 	})
 })
-app.delete('/tasks/remove/:id', (req, res) =>{
+app.delete('/remove/:id', (req, res) =>{
 	let task = Task.findOneAndRemove({_id: req.params.id}, (err, task)=>{
 		console.log('task deleted')
-		res.redirect('/')
+		res.json({message: 'success'})
 	})
 })
 

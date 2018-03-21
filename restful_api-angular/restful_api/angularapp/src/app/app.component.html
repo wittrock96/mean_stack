@@ -6,7 +6,32 @@
 <div *ngIf="(!hidden)">
 <ul *ngFor="let element of tasks">
   <li>Title: {{element.title}}</li>
+  <p> <button (click)='show_edit_form(element)'>edit</button> <button (click)="deleteTask(element)">delete</button></p>
 </ul>
+</div>
+<div *ngIf='show_edit == true'>
+  <form (submit)='editTask($event)'>
+    <label>title:</label>
+    <input 
+        type="text" 
+        name="title"
+        minlength="2"
+        maxlength="10"
+        required
+        [(ngModel)]="current_task.title"
+        >
+        <label>description:</label>
+    <input 
+        type="text" 
+        name="desc"
+        minlength="2"
+        maxlength="10"
+        required
+        [(ngModel)]="current_task.desc"
+        >
+    <button type="submit">edit</button>
+  </form>
+  
 </div>
 <p></p>
 <form (submit)="getTaskFromService($event)">
