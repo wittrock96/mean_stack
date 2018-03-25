@@ -11,7 +11,7 @@ export class AppComponent implements OnInit{
  	task;
  	newtask;
  	edittask;
- 	current_task = {};
+ 	current_task = any;
  	hidden = true;
  	show_edit = false;
  	
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
   	this.task = {id:''}
   	this.newtask={title:'', desc:''}
-  	// this.getTasksFromService();
+  	this.getTasksFromService();
 
   }
   getTasksFromService(){
@@ -28,8 +28,8 @@ export class AppComponent implements OnInit{
   	observable.subscribe(data => {
   		console.log('got our tasks', data)
   		this.tasks = data['tasks'];
-  		console.log(this.tasks)
   		
+      console.log(this.tasks)
   	})
   }
   	getTaskFromService(event){

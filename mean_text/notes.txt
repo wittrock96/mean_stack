@@ -1,0 +1,14 @@
+status(401):
+changes the status of the json return so instead of getting and ok response with the errors 
+it just responds with an error
+
+
+subsrube takes two callbacks:
+one for when the respone was a success, and one for the error
+
+
+#name_of_field
+says that this field can be controlled
+
+unique checks:
+checking for duplicated,

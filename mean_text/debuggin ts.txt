@@ -82,3 +82,19 @@ console.log(study(turing));
 
 I'm not really sure if this was what i was suppose to do or not but i didn't really knwo what else to do
 
+
+class Elephant {
+   constructor(public age: number){}
+   birthday = ()=> {
+      this.age++;
+   }
+}
+const babar = new Elephant(8);
+setTimeout(babar.birthday, 1000)
+setTimeout(function(){
+   console.log(`Babar's age is ${babar.age}.`)
+   }, 2000)
+// Why didn't babar's age change? Fix this by using an arrow function in the Elephant class.
+
+I just got rid of the word fundtion and put an arrow function just like it says but why is that so simple?
+
