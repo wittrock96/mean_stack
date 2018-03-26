@@ -1,0 +1,16 @@
+<h1>
+  Create A new Author
+</h1>
+
+<form (submit)="newAuthor($event)">
+	
+	<label>name:</label>
+	<input 
+	type="text"
+	name="name"
+	placeholder="put name here" 
+	minlength="3"
+	[(ngModel)]="createAuthor.name"
+	>
+	<button type="submit">create</button>
+</form>
