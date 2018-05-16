@@ -1,0 +1,14 @@
+<button [routerLink]="['/']">home</button>
+
+<h1>
+	Update {{author?.name}}
+</h1>
+
+<form (submit)="updateAuthor($event)">
+	<input
+	type="text"
+	name="name"
+	[(ngModel)]="author.name"
+	#name="ngModel">
+	<input type="submit">
+</form>

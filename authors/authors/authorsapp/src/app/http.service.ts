@@ -12,8 +12,13 @@ export class HttpService {
   	console.log('inside service')
   	return this._http.post('/authors/new', createAuthor)
   }
-
-  edit(editAuthor){
-  	return this._http.put('/edit/:id', editAuthor)
+  update(id, currentAuthor){
+  	console.log('inside of update')
+  	return this._http.patch(`/authors/${id}`, currentAuthor)
   }
+  getAuthor(id){
+  	return this._http.get(`/author/${id}`)
+  }
+
+
 }

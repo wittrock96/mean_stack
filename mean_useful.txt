@@ -1,0 +1,15 @@
+
+Start a new angular project:
+npm install -g @angular/cli
+ng new myFirstAngularApp
+with routing:
+ng new myFirstAngularApp --routing
+
+
+sudo kill 12312
+sudo pm2 stop 0
+sudo pm2 start mongod
+sudo pm2 status
+sudo service nginx stop
+sudo service nginx start
+history

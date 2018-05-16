@@ -1,3 +1,13 @@
 <h1>
-  Edit
+  Edit {{currentAuthor.name}}
 </h1>
+<form (submit)="updateAuthor($event)">
+	<label>name:</label>
+	<input 
+	type="text"
+	name="name"
+	[(ngModel)]="currentAuthor.name"
+	#name="ngModel"
+	>
+	<button type="submit">update</button>
+</form>

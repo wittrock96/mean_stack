@@ -52,16 +52,43 @@ app.post('/authors/new', (req, res)=>{
 		}
 	})
 })
-app.put('/edit/:id', (req, res)=>{
-	Author.findOneAndUpdate({_id: req.params.id}, {name: req.body.name}, (err, author)=>{
-		if (err){
-			res.json({message: 'error', error: err})
+app.patch('/authors/:id', (req, res)=>{
+	console.log('inside app.patch')
+	let author = Author.findOne({_id: req.params.id}, (err, author)=>{
+		if(err){
+			console.log('error')
+			res.json({message:'error', errors:err})
+
 		}
 		else{
-			res.json('you have updated this author', {author: author})
+			console.log('inside first else')
+			author.name = req.body.name
+			author.save((err)=>{
+				if(err){
+					console.log('something fucked up in the second if', err)
+					res.json({message:'error', errors: err})
+				}
+				else{
+					console.log('holy shit it worked')
+					res.json({message: 'success', author: author})
+
+				}
+			})
 		}
 	})
-
+})
+app.get('/author/:id', (req, res)=>{
+	console.log('inside get author server')
+	Author.findOne({_id: req.params.id}, (err, author)=>{
+		if (err){
+			console.log('soemthing has fucked up')
+			res.json(err)
+		}
+		else{
+			console.log('got the author, coming back to you', req.params.id)
+			res.json({author: author})
+		}
+	})
 })
 app.listen(8000, ()=>{
 	console.log('listening on port 8000')

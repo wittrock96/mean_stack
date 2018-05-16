@@ -8,11 +8,11 @@
 			<th>Authors</th>
 			<th>Actions</th>	
 		</tr>
-		<tr>
+		<tr *ngFor='let authors of authors'>
 			<td>{{authors.name}}</td>
-			<td><button [routerlink]="edit"></button></td>
+			<td><button [routerLink]="['/edit/', authors._id]">edit</button></td>
 		</tr>
 	</table>
 </div>
-<!-- *ngFor='let authors of authors' -->
+<!--  -->
 <!-- {{authors.name}} -->

@@ -1,0 +1,17 @@
+<button [routerLink]="['/']">home</button>
+<h1>
+  add a quote for {{author?.name}}
+</h1>
+
+<form (submit)="createQuote($event)">
+	<input
+	type="text"
+	name="content"
+	minlength="5"
+	[(ngModel)]="newQuote.content"
+	#content="ngModel"
+	>
+	<input type="submit">
+	
+
+</form>
