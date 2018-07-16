@@ -5,6 +5,13 @@ ng new myFirstAngularApp
 with routing:
 ng new myFirstAngularApp --routing
 
+create dist folder:
+ng build --watch
+in server.js; app.use(express.static( __dirname + '/public/dist/public' ));
+or whatever you named your angular project folder
+
+
+
 
 sudo kill 12312
 sudo pm2 stop 0
