@@ -81,7 +81,7 @@ app.get('/author/:id', (req, res)=>{
 	console.log('inside get author server')
 	Author.findOne({_id: req.params.id}, (err, author)=>{
 		if (err){
-			console.log('soemthing has fucked up')
+			console.log('did not work')
 			res.json(err)
 		}
 		else{
