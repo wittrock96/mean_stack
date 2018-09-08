@@ -65,11 +65,11 @@ app.patch('/authors/:id', (req, res)=>{
 			author.name = req.body.name
 			author.save((err)=>{
 				if(err){
-					console.log('something fucked up in the second if', err)
+					console.log('did not work', err)
 					res.json({message:'error', errors: err})
 				}
 				else{
-					console.log('holy shit it worked')
+					console.log('it worked')
 					res.json({message: 'success', author: author})
 
 				}

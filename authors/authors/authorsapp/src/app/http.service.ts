@@ -19,6 +19,4 @@ export class HttpService {
   getAuthor(id){
   	return this._http.get(`/author/${id}`)
   }
-
-
 }
