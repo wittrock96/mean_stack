@@ -1,0 +1,32 @@
+<p>
+  showroom works!
+</p>
+
+
+<form #form="ngForm" (submit)="addReview($event)">
+
+	<label>make: </label>
+	<input type="text" 
+	name="make"
+	minlength="3"
+	[(ngModel)]="newReview.make"
+	#make="ngModel">
+
+	<label>model: </label>
+	<input type="text" 
+	name="model"
+	minlength="3"
+	[(ngModel)]="newReview.model"
+	#model="ngModel">
+
+	<label>description: </label>
+	<input type="text" 
+	name="description"
+	minlength="8"
+	[(ngModel)]="newReview.description"
+	#description="ngModel">
+
+	<input type="submit">
+	
+
+</form>

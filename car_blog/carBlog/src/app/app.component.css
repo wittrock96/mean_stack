@@ -1,0 +1,11 @@
+*{
+  text-align: center;
+}
+
+#navBar{
+  text-align: left;
+}
+
+#logBtn{
+  float: right;
+}

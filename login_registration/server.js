@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/database')
 var Schema = mongoose.Schema;
 var UserSchema = new mongoose.Schema({
 	first_name: { type: String,
-	required: [true, "first name cannot be empt"],
+	required: [true, "first name cannot be empty"],
 	minlength: 2,
 	trim: true},
 

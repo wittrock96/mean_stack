@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <div class="slideshow-container">
+    
+  </div>
+  <a [routerLink]="['/login']" id="logBtn">login</a>
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <div id="navBar">
+    <button [routerLink]="['/']">home</button>
+    <button [routerLink]="['/showroom']">Showroom</button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
