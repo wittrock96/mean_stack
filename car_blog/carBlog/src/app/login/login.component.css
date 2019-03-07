@@ -1,3 +1,10 @@
 #wrapper label, input{
 	display: block;
 }
+#wrapper{
+	background-color: red;
+}
+
+#wrapper h3{
+	margin: 0px;
+}

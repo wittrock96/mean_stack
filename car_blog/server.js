@@ -8,19 +8,21 @@ let express = require('express'),
 	salt = bcrypt.genSaltSync(10),
 	hash = bcrypt.hashSync("B4c0/\/email", salt);
 
+
 var Schema = mongoose.Schema;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static( __dirname + "/carBlog/dist/carBlog" ));
 
+
 app.use(session({
-	resave: false,
-	saveUinitialized: false,
-	proxy: true,
-	secret: "fjadstjprjgkperjwkgjskfgmweogkaosfmgokgasg",
-	cookie: { maxAge: 60 * 100}
+  secret: 'afsdghlfgjalk;fsdgjikafsdjgop',
+  resave: false,
+  saveUninitialized: true
 }))
+
+app.use(bodyParser.json());
+
+
 
 let UserSchema = new mongoose.Schema({
 	first_name: { type: String, minlength:3, required:[true, "enter first name"]},
@@ -43,6 +45,7 @@ let UserSchema = new mongoose.Schema({
 
 let ReviewSchema = new mongoose.Schema({
 	_user: {type: Schema.Types.ObjectId, ref: 'User'},
+	year: {type: String, minlength: 4},
 	make: { type: String, minlength: 3, required: [true, 'please enter make of vehicle']},
 	model: {type: String, minlength: 3 },
 	description: {type: String, minlength: 10, required: [true, 'please enter a price']},
@@ -67,7 +70,7 @@ let RatingSchema = new mongoose.Schema({
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/portfolio', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/portfolio', { useNewUrlParser: true })
 
 mongoose.model('User', UserSchema)
 mongoose.model('Review', ReviewSchema)
@@ -79,6 +82,8 @@ var Review = mongoose.model('Review')
 var User = mongoose.model('User')
 var Comment = mongoose.model('Comment')
 var Rating = mongoose.model('Rating')
+
+
 
 app.post('/registration', (req, res)=>{
 	console.log('inside /registration')
@@ -110,11 +115,71 @@ app.post('/registration', (req, res)=>{
 		}
 	})
 })
+app.get('/testing/session', (req, res)=>{
+	if (!req.session.user) {
+		return res.status(401).send()
+	}
+	else{
+		return res.status(200).send("welcome the showroom")
+	}
+})
+app.post('/signin', (req, res)=>{
+	console.log('inside /signin')
+	
+	let user = User.findOne({email: req.body.email}, (err, user)=>{
+	console.log(user)	
+		if(err){
+			console.log('wrong email in /login')
+			console.log(user.first_name)
+			return res.status(400).json({message: 'error', error: err});
+
+		}
+		else{
+			// console.log(user.first_name)
+			bcrypt.compare(req.body.password, user.password, (err, response)=>{
+				if (response == true) {
+					req.session.user = user;
+					console.log('session name', req.session.user.first_name)
+					console.log('user logged in')
+					res.json({message: 'logged in', user: user})
+				}
+				else{
+					console.log('something went wrong coparing passwords')
+					return res.status(400).json({message: 'error', error: err})
+				}
+			})
+		}
+	})
+})
+
+app.get('/logout', (req, res)=>{
+	console.log('logging out user')
+	if (req.session.user) {
+		req.session.destroy((err)=>{
+			if (err) {
+				console.log('error loggin out sesssion user')
+				return res.status(401).json({message: 'error', error: err})
+			}
+			else{
+				console.log('user logged out')
+				res.json({message: "logged out"})
+			}
+		})
+	}
+	else{
+		res.json({message: "no user to log out"})
+		console.log("no user to log out")
+	}
+})
 
 app.post('/review/new', (req, res)=>{
 	console.log('inside /review/new')
-
+	if (!req.session.user) {
+		return res.status(401).send({message: "please login to create a review"})
+	}
 	let review = new Review({
+		_user: req.session.user._id,
+		year: req.body.year,
 		make: req.body.make,
 		model: req.body.model,
 		description: req.body.description
@@ -128,6 +193,18 @@ app.post('/review/new', (req, res)=>{
 		else{
 			console.log('created review, heading to html')
 			res.json("added review")
+		}
+	})
+})
+app.get('/reviews', (req, res)=>{
+	Review.find({}, (err, reviews)=>{
+		if(err){
+			console.log('soemthing went wrond getting reviews')
+			return res.json({message:'error', error: err})
+		}
+		else{
+			console.log('got reviews coming back')
+			return res.json({message: 'success', reviews: reviews})
 		}
 	})
 })

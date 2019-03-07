@@ -11,12 +11,16 @@ export class ShowroomComponent implements OnInit {
 	newReview: any;
 	response: any;
 	error: any;
+	users: any;
+  reviews: any;
   constructor(
   	private _httpService: HttpService,
   	private _route: ActivatedRoute,
   	private _router: Router) { }
 
   ngOnInit() {
+    
+    this.displayReviews()
   	this.newReview = {
   		make: '',
   		model: '',
@@ -24,15 +28,17 @@ export class ShowroomComponent implements OnInit {
   	}
   }
 
-  addReview(event){
-  	event.preventDefault()
-  	console.log("in showroom component, heading to service")
-  	let observable = this._httpService.createReview(this.newReview)
-  	observable.subscribe(data =>{
-  		data = data.json()
-  		this.error = data['error']
-  		console.log(this.error)
-  	})
+
+
+
+  displayReviews(){
+    console.log('getting reviews')
+    let observable = this._httpService.allReviews()
+    observable.subscribe(info =>{
+      info = info.json()
+      this.reviews = info['reviews']
+      console.log(this.reviews)
+    })
   }
 
 }

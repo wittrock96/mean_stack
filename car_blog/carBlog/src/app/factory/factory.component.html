@@ -1,0 +1,40 @@
+<div id="wrapper">
+	<h3>
+	  create your own review
+	</h3>
+	<small>(Please login to create a review)</small>
+	<form #form="ngForm" (submit)="addReview($event)">
+		<label>year: </label>
+		<input type="text" 
+		name="year"
+		minlength="4"
+		[(ngModel)]="newReview.year"
+		#year="ngModel">
+		<label>make: </label>
+		<input type="text" 
+		name="make"
+		minlength="3"
+		[(ngModel)]="newReview.make"
+		#make="ngModel">
+
+		<label>model: </label>
+		<input type="text" 
+		name="model"
+		minlength="3"
+		[(ngModel)]="newReview.model"
+		#model="ngModel">
+
+		<label>description: </label>
+		<input type="text" 
+		name="description"
+		minlength="8"
+		[(ngModel)]="newReview.description"
+		#description="ngModel">
+
+		<input type="submit">
+		
+
+	</form>
+
+	<button [routerLink]="['/showroom']">cancel</button>
+</div>

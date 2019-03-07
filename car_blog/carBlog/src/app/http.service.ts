@@ -7,7 +7,7 @@ import { Http } from '@angular/http';
 export class HttpService {
 
   constructor(private _http: Http) { }
-
+    loggedIn = false;
 
   	create(newUser){
   		console.log('in service, heading to server')
@@ -20,5 +20,21 @@ export class HttpService {
   		console.log(newReview)
   		return this._http.post('/review/new', newReview)
   	}
+
+  	
+
+  	signIn(loginInfo){
+      this.loggedIn = true;
+  		console.log("in service, heading to server to login")
+  		return this._http.post('/signin', loginInfo)
+  	}
+    allReviews(){
+      console.log('in service, getting reviews')
+      return this._http.get('/reviews')
+    }
+    logout(){
+      console.log('in service, heading to server to log out session user')
+      return this._http.get('/logout')
+    }
 
 }

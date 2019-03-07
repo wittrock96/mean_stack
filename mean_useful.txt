@@ -12,8 +12,10 @@ or whatever you named your angular project folder
 
 
 
+** to see what mongod instances are running **
+ps ax | grep mongod
+**
 
-sudo kill 12312
 sudo pm2 stop 0
 sudo pm2 start mongod
 sudo pm2 status

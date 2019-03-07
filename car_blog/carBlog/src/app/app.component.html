@@ -1,12 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div>
-  <div class="slideshow-container">
-    
+<div id="wrapper">
+
+  <a [routerLink]="['/login']" class="logBtn">login</a>
+  <a (click)="logout()" class="logBtn">logout</a>
+  <div id="headline"> 
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
   </div>
-  <a [routerLink]="['/login']" id="logBtn">login</a>
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
   <div id="navBar">
     <button [routerLink]="['/']">home</button>
     <button [routerLink]="['/showroom']">Showroom</button>

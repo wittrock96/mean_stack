@@ -1,11 +1,22 @@
 *{
   text-align: center;
+  
+}
+#wrapper{
+	background-color: red;
+}
+#headline{
+	display: flex;
 }
 
 #navBar{
   text-align: left;
+  background-color: black;
+}
+#navBar button{
+	margin: 10px;
 }
 
-#logBtn{
+.logBtn{
   float: right;
 }

@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router} from '@angular/router'
 })
 export class LoginComponent implements OnInit {
 	newUser: any;
+	loginInfo: any;
 	response: any;
 	error: any;
   constructor(
@@ -18,6 +19,10 @@ export class LoginComponent implements OnInit {
   	) { }
 
 	ngOnInit() {
+		this.loginInfo = {
+			email: '',
+			password: ''
+		}
 		this.newUser = {
 		first_name:'',
 		last_name:'',
@@ -31,6 +36,18 @@ export class LoginComponent implements OnInit {
 		event.preventDefault()
 		console.log("creating user")
 		let observable = this._httpService.create(this.newUser)
+		observable.subscribe(data =>{
+			data = data.json()
+			this.error = data['error']
+			console.log(this.error)
+			this._router.navigate(['']);
+		})
+	}
+
+	loginUser(event){
+		event.preventDefault()
+		console.log('logging in')
+		let observable = this._httpService.signIn(this.loginInfo)
 		observable.subscribe(data =>{
 			data = data.json()
 			this.error = data['error']
