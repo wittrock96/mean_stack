@@ -6,12 +6,23 @@ let express = require('express'),
 	session = require('express-session'),
 	bcrypt = require('bcryptjs'),
 	salt = bcrypt.genSaltSync(10),
-	hash = bcrypt.hashSync("B4c0/\/email", salt);
+	hash = bcrypt.hashSync("B4c0/\/email", salt),
+	multer = require('multer'),
+	fs = require('fs');
+
+	// GridFsStorage = require('multer-gridfs-storage'),
+	// Grid = require('gridfs-stream'),
+	// methodOverride = require('method-override');
 
 
 var Schema = mongoose.Schema;
-
+var upload = multer({dest: 'uploads/',
+	rename: (fieldname, filename)=>{
+		return filename;
+	}});
 app.use(express.static( __dirname + "/carBlog/dist/carBlog" ));
+
+
 
 
 app.use(session({
@@ -49,6 +60,7 @@ let ReviewSchema = new mongoose.Schema({
 	make: { type: String, minlength: 3, required: [true, 'please enter make of vehicle']},
 	model: {type: String, minlength: 3 },
 	description: {type: String, minlength: 10, required: [true, 'please enter a price']},
+	img: { data: Buffer, contentType: String },
 	_rating: { type: Schema.Types.ObjectId, ref: 'ratings'},
 	_comment: [{ type: Schema.Types.ObjectId, ref: 'comments'}]
 }, {timestamps: true})
@@ -68,9 +80,11 @@ let RatingSchema = new mongoose.Schema({
 
 
 
-
+//mongo URI
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/portfolio', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/portfolio', { useNewUrlParser: true });
+
+
 
 mongoose.model('User', UserSchema)
 mongoose.model('Review', ReviewSchema)
@@ -184,7 +198,8 @@ app.post('/review/new', (req, res)=>{
 		model: req.body.model,
 		description: req.body.description
 	})
-
+	// review.img.data = fs.readFileSync(req.files.photo.path)
+	// review.img.contentType = 'image/jpeg';
 	review.save((err)=>{
 		if(err){
 			console.log("something went wrong when saving reveiw")

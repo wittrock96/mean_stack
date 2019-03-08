@@ -31,6 +31,12 @@
 		[(ngModel)]="newReview.description"
 		#description="ngModel">
 
+		<label>Upload Photo:</label>
+		<input type="file"
+		name="photo"
+		[(ngModel)]="newReview.photo"
+		#photo="ngModel">
+
 		<input type="submit">
 		
 

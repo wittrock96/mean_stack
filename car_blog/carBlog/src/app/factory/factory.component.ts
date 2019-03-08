@@ -21,7 +21,8 @@ export class FactoryComponent implements OnInit {
   		year:'',
   		make: '',
   		model: '',
-  		description: ''
+  		description: '',
+  		photo: ''
   	}
   }
     addReview(event){
