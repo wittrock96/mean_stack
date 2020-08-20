@@ -31,7 +31,7 @@ function Ninja(name, health, speed, strength) {
 			return this
 		}
 		else{
-			return "something fucked up"
+			return "something went wrong"
 		}
 	}
 	this.kick = function(ninja){
@@ -42,7 +42,7 @@ function Ninja(name, health, speed, strength) {
 			console.log(this.health)
 		}
 		else{
-			return "something fuked up again"
+			return "something went wrong again"
 		}
 	}
 }
